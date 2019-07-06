@@ -7,14 +7,14 @@ import QuestionEditTemplate from './template';
 
 function mapStateToProps(state, props) {
     return {
-        question: state.questions.find(question=>+question._id===+props.match.params.id),
+        question: state.questions.find(question=>question._id===props.match.params.id),
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        questionCreate: (question) => dispatch(questionCreate(question)),
-        questionUpdate: (question) => dispatch(questionUpdate(question)),
+        questionCreate: (question, callBack) => dispatch(questionCreate(question, callBack)),
+        questionUpdate: (question, callBack) => dispatch(questionUpdate(question, callBack)),
     };
 }
 

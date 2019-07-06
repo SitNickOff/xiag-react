@@ -4,7 +4,7 @@ import PollResult from './PollResult';
 
 class QuestionView extends React.Component {    
     render() {
-        const {question, history, addResponse} = this.props;
+        const {question, history, addResponse, userAdd, user} = this.props;
         return (
             <React.Fragment>
                 <div style={{display: 'flex'}}>
@@ -13,10 +13,10 @@ class QuestionView extends React.Component {
                         <button className="btn" onClick={history.goBack}>Back</button>
                     </div>
                 </div>
-                {question.respondentsAnswers.find(resA=>resA.isMine?true:false)===undefined&&
-                    <ResponseForm question={question} addResponse = {addResponse} />
+                {question.respondentsAnswers.find(resA=>resA.isMine)===undefined&&
+                    <ResponseForm question={question} user={user} addResponse = {addResponse} userAdd={userAdd} />
                 }
-                <PollResult question={question}/>
+                <PollResult question={question} user={user}/>
             </React.Fragment>
         );
     }

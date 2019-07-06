@@ -1,5 +1,5 @@
 import {
-    QUESTIONS_ADD_RESPONSE, QUESTION_CREATE, QUESTION_UPDATE
+    QUESTIONS_ADD_RESPONSE, QUESTION_CREATE, QUESTION_UPDATE, QUESTIONS_GET
 } from '../actions';
 
 const initialState = [
@@ -26,6 +26,18 @@ const initialState = [
 
 function reducer(state = initialState, action) {
     switch (action.type) {
+        case QUESTIONS_GET:
+            return action.answer.map(question=>{
+                if (!question.answers)
+                    return {
+                        ...question,
+                        answers: [],
+                        respondentsAnswers: []
+                    }
+
+                return question;
+            });
+
         case QUESTION_CREATE:
             return [
                 ...state,
@@ -45,11 +57,8 @@ function reducer(state = initialState, action) {
 
         case QUESTIONS_ADD_RESPONSE:            
             return state.map(quest=>{
-                if (quest._id===action.questionId) {
-                    return{
-                        ...quest,
-                        respondentsAnswers: [...quest.respondentsAnswers, action.resp]
-                    }
+                if (quest._id===action.question._id) {
+                    return action.question;
                 }
 
                 return quest;

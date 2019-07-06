@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import QuestionListTemplate from './template';
+import { questionsGet, questionDelete } from '../../actions';
 
 function mapStateToProps(state) {
     return {
@@ -11,7 +12,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        //productsAmountTotalRent: (cartProducts, weeksQuantity) => cartProductsAmountTotalRent(cartProducts, weeksQuantity),
+        questionsGet: () => dispatch(questionsGet()),
+        questionDelete: (id) => dispatch(questionDelete(id))
     };
 }
 

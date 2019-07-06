@@ -1,7 +1,6 @@
 import React from 'react';
 
-const PollResult = ({question}) => {
-    console.log({question});
+const PollResult = ({question, user}) => {
     return (
         <div>
             <h3>Results</h3>
@@ -15,13 +14,13 @@ const PollResult = ({question}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {question.respondentsAnswers.map((respondentsAnswer, index) => 
-                        <tr key={index} style={{background: respondentsAnswer.isMine?'rgb(248, 155, 28, .2)':'inherit'}}>
-                            <td>{respondentsAnswer.respondent}</td>
+                    {question.respondentsAnswers.map((rAnswer, index) => 
+                        <tr key={index} style={{background: rAnswer.isMine?'rgb(248, 155, 28, .2)':'inherit'}}>
+                            <td>{rAnswer.respondent}</td>
                             {question.answers.map((answer, aIndex)=>
-                                <td key={aIndex}>{answer===respondentsAnswer.answer?'X':''}</td>    
+                                <td key={aIndex}>{answer===rAnswer.answer?'X':''}</td>    
                             )}
-                        </tr>    
+                        </tr>  
                     )}
                 </tbody>
             </table>

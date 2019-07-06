@@ -3,13 +3,15 @@ import React from 'react';
 class ResponseForm extends React.Component{
 
     state = {
-        respondent: '',
+        respondent: this.props.user.name,
         answer: '',
         isMine: true
     };
 
     handleChangeResponden = event => {
-        this.setState({ respondent: event.target.value });
+        this.setState({ 
+            respondent: event.target.value
+        });
     };
 
     handleSelectAnswer = event => {
@@ -17,14 +19,14 @@ class ResponseForm extends React.Component{
     }
     
     handleSendResponse = () => {
-        if (this.state.respondent!==''&&this.state.answer!=='')
-            this.props.addResponse(this.props.question._id, this.state);
-        else 
+        if (this.state.respondent!==''&&this.state.answer!=='') {
+            this.props.userAdd(this.state.respondent);
+            this.props.addResponse(this.props.question, this.state);
+        } else 
             console.log('alert: fill all fields');
     }
 
-    render() {
-        
+    render() {        
         const {question} = this.props;
         return (
             <div className="ex2-question">
@@ -35,7 +37,7 @@ class ResponseForm extends React.Component{
                     <input 
                         type="text" 
                         className="input-text" 
-                        value={this.state.respondent?this.state.respondent:''} 
+                        value={this.state.respondent} 
                         onChange={this.handleChangeResponden}
                         placeholder={'insert your name'}
                     />

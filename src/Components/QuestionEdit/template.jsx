@@ -37,14 +37,12 @@ class EditForm extends React.Component {
             if (answer==='') validate=false;
         });
 
-        if (validate) {
+        if (validate) {    
             if (this.state._id === 0) {
-                this.props.questionCreate(this.state);
+                this.props.questionCreate(this.state, ()=>this.props.history.push('/poll'));
             } else {
-                this.props.questionUpdate(this.state);
-            }
-
-            this.props.history.push('/poll');
+                this.props.questionUpdate(this.state, ()=>this.props.history.push('/poll'));
+            }           
 
         } else
             console.log('alert: fill all fields');
