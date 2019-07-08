@@ -20,11 +20,11 @@ const Page = (props) => {
             <Header />
             <Content>
                 <Switch>
-                    <Route exact path='/' component={IndexPage}/>
+                    <Route exact path='/' component={QuestionEditPage}/>
                     <Route exact path='/poll' component={IndexPage} {...props}/>
-                    <Route exact path='/poll/create' component={QuestionEditPage} new={true} />
+                    {/* <Route exact path='/poll/create' component={QuestionEditPage} /> */}
                     <Route exact path='/poll/:id' component={QuestionViewPage} />   
-                    <Route exact path='/poll/:id/edit' component={QuestionEditPage} new={true} />                 
+                    <Route exact path='/poll/:id/edit' component={QuestionEditPage} />                 
                     <Route component={NotFound} />
                 </Switch>
             </Content>

@@ -4,8 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     root: {
-      display: 'flex',
-      width: 360,
     },
     link: {
         margin: '0 8px'
@@ -15,10 +13,11 @@ const styles = theme => ({
 const Toolbar = ({classes}) => {
     return (
         <nav className={classes.root}>
-            <ToolbarLink to="/" className="mdc-tab">Poll</ToolbarLink>
+            <ToolbarLink to="/" className={classes.link}>New Poll</ToolbarLink>
+            <ToolbarLink to="/poll" className={classes.link}>All Polls</ToolbarLink>
             
             <a className = {classes.link} href='https://test-task.xiag.ch/fullstack-developer.html' target='_blank' rel="noopener noreferrer">
-                Task
+                Test Task
             </a>                    
             
         </nav>

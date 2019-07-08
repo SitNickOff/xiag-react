@@ -4,8 +4,7 @@ class ResponseForm extends React.Component{
 
     state = {
         respondent: this.props.user.name,
-        answer: '',
-        isMine: true
+        answer: ''
     };
 
     handleChangeResponden = event => {
@@ -23,7 +22,7 @@ class ResponseForm extends React.Component{
             this.props.userAdd(this.state.respondent);
             this.props.addResponse(this.props.question, this.state);
         } else 
-            console.log('alert: fill all fields');
+            alert('Fill All Fields');
     }
 
     render() {        

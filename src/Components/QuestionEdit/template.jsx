@@ -28,6 +28,9 @@ class EditForm extends React.Component {
         });
     };
 
+    redirectToPollPage = (id) => this.props.history.push(`/poll/${id}`);
+    redirectToPageAllQuestions = () => this.props.history.push('/poll')
+
     addQuestionChanges = () => {
         let validate = true;
 
@@ -39,13 +42,13 @@ class EditForm extends React.Component {
 
         if (validate) {    
             if (this.state._id === 0) {
-                this.props.questionCreate(this.state, ()=>this.props.history.push('/poll'));
+                this.props.questionCreate(this.state, this.redirectToPollPage);
             } else {
-                this.props.questionUpdate(this.state, ()=>this.props.history.push('/poll'));
+                this.props.questionUpdate(this.state, this.redirectToPollPage);
             }           
 
         } else
-            console.log('alert: fill all fields');
+            alert('Fill All Fields');
     }
 
     render() {
@@ -56,7 +59,7 @@ class EditForm extends React.Component {
                 <div style={{display: 'flex', marginBottom: 16}}>
                     <h2 style={{marginRight: 'auto'}}>{question?'Edit Question': 'New Question'}</h2>
                     <div className="ex2-question__submit">
-                        <button className="btn" onClick={history.goBack} >Back</button>
+                        <button className="btn" onClick={()=>history.push('/poll')} >All Polls</button>
                     </div>
                 </div>
 
@@ -69,7 +72,7 @@ class EditForm extends React.Component {
                                     type="text" 
                                     value={question?question.content:''} 
                                     className="input-text" 
-                                    placeholder='Insert question'
+                                    placeholder='Enter a question'
                                     onChange = {this.handleChangeContent}
                                 />
                             </th>
@@ -83,7 +86,7 @@ class EditForm extends React.Component {
                                     <input 
                                         type="text" 
                                         value={answer} 
-                                        placeholder='Enter option' 
+                                        placeholder='Enter an option' 
                                         onChange={this.handleChangeAnswer(index)} 
                                         className="input-text" 
                                     />
@@ -101,7 +104,7 @@ class EditForm extends React.Component {
                     </tbody>
                 </table>
                 <button className="btn btn--start" onClick={this.addQuestionChanges}>
-                    Start
+                    {question._id?'Change':'Start'}
                 </button>
             </React.Fragment>
         );

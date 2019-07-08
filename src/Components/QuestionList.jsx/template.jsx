@@ -16,7 +16,7 @@ class QuestionsList extends React.Component{
                 <div style={{display: 'flex', marginBottom: 16}}>
                     <h2 style={{marginRight: 'auto'}}>Question List</h2>
                     <div className="ex2-question__submit">
-                        <button className="btn" onClick={()=>history.push('/poll/create')} >Add Question</button>
+                        <button className="btn" onClick={()=>history.push('/')} >Add Question</button>
                     </div>
                 </div>
 

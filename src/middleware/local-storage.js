@@ -14,13 +14,16 @@ export function loadState(key = 'state') {
 
 export default key => store => next => action => {
     let result = next(action);
-
+    const state = store.getState();
     try {
-        let json = JSON.stringify(key?store.getState()[key]:store.getState());
+        let json = JSON.stringify(key?state[key]:state);
         localStorage.setItem(key || 'state', json);
     } catch (error) {
         console.error(error);
     }
+
+    // console.log({state});
+    // console.log({saveState: JSON.parse(localStorage.getItem('state'))});
 
     return result;
 }

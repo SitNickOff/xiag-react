@@ -1,8 +1,12 @@
 import React from 'react';
 
 const NotFound = () => {
+
     return (
-        <h1>NotFound</h1>
+        <div style={{textAlign: 'center'}}>
+            <h2>Page Not Found</h2>
+        </div>
+        
     );
 }
 
