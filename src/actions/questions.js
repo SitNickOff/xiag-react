@@ -96,8 +96,8 @@ export const QUESTION_UPDATE = 'QUESTION_UPDATE';
 
 export function questionUpdate(question, callBack) {
     return dispatch => {
-        const sQuestion = question;
-        const id = sQuestion._id;
+        const sQuestion = {...question};
+        const id = sQuestion._id; console.log({id})
         delete sQuestion._id;
         return axios.post(`http://localhost:5000/api/${id}/update`, sQuestion)
             .then(response => response.data)
@@ -143,23 +143,20 @@ export function QuestionAddResponse(question, resp) {
             ...question,
             respondentsAnswers: [...question.respondentsAnswers, resp]
         };
-        // console.log({question, changedQuestionToServer});
         const myResp = {...resp, isMine: true}
         const changedQuestionToLocal = {
             ...question,
             respondentsAnswers: [...question.respondentsAnswers, myResp]
         };
-        // console.log({question, changedQuestionToServer});
 
         dispatch(questionGet(question._id, ()=>{ 
-            dispatch(questionUpdate(changedQuestionToServer, ()=>{
-                // console.log({changedQuestionToServer})
-                dispatch(wsSendMessage(changedQuestionToServer));
+            dispatch(questionUpdate(changedQuestionToServer, ()=>{                
                 dispatch({
                     type: QUESTIONS_ADD_RESPONSE,
                     question: changedQuestionToLocal,
                     resp
                 }); 
+                dispatch(wsSendMessage({questionId:question._id}));
             }));
             
         }));

@@ -1,4 +1,4 @@
-import { questionsGet } from "./questions";
+import { questionGet } from "./questions";
 
 export const WS_CREATE_CONNECTION = 'WS_CREATE_CONNECTION';
 
@@ -40,13 +40,14 @@ export function wsOnclose() {
 export const WS_ONMESSAGE = 'WS_ONMESSAGE';
 
 export function wsOnmessage(message) {
-    console.log({message})
     return dispatch => {
+        const questionId = JSON.parse(message.data).questionId;
+         
+        dispatch(questionGet(questionId));
         dispatch({
             type: WS_ONMESSAGE,
             message
-        });
-        dispatch(questionsGet());
+        });        
     }
 }
 
