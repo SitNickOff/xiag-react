@@ -56,16 +56,18 @@ function reducer(state = [], action) {
             if (lQuestion === undefined) return [...state, action.question];
 
             return state.map(question=>{
-                if (question._id===lQuestion) 
+                
+                if (question._id===lQuestion._id) {
                     return {
-                        ...question,
-                        respondentsAnswers: question.respondentsAnswers.map((rA, rIndex)=>{
+                        ...action.question,
+                        respondentsAnswers: action.question.respondentsAnswers.map((rA, rIndex)=>{
                             if (lQuestion.respondentsAnswers[rIndex]&&lQuestion.respondentsAnswers[rIndex].isMine)
                                 return {...lQuestion.respondentsAnswers[rIndex]};
 
                             return rA;
                         })
                     };
+                }
 
                 return question;
             });
